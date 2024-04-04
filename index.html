@@ -53,23 +53,49 @@
             center: myLatLng,
             zoom: 3,
         });
-        geocoder = new google.maps.Geocoder();
+    //    geocoder = new google.maps.Geocoder();
 
 
          codeAddress(address);
 
+        var latLng = new google.maps.LatLng(-34.397, 150.644);
+        var mIcon = {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillOpacity: 1.0,
+            fillColor: '#2C2CF7',
+            strokeOpacity: 0.8,
+            strokeWeight: 6,
+            strokeColor: '#221461',
+            scale: 16
+          /*  scale: 15,
+            fillColor: fillColor,
+            fillOpacity: 1.0,
+            strokeWeight: 6,
+            strokeOpacity: 0.8,
+            strokeColor: outsideColor,
+            rotation: 30*/
+        };
 
+        var gMarker = new google.maps.Marker({
+            map: map,
+            position: latLng,
+            title: 'Number 123',
+            icon: mIcon,
+            label: {color: '#fff', fontSize: '10px', fontWeight: '600',
+                text: '60'}
+        });
     }
 
     initMap();
 
     function codeAddress(address) {
 
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            console.log(results);
-            var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
+    //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //    console.log(results);
+       //     var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
+        var latLng={ lat: 31.768319, lng: 35.21371 };
             console.log (latLng);
-            if (status == 'OK') {
+            if (1) {
 
                 var marker =  new google.maps.Marker({
                     position: latLng,
@@ -376,9 +402,9 @@
                 });
                 console.log (map);*/
             } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+              //  alert('Geocode was not successful for the following reason: ' + status);
             }
-        });
+      //  });
     }
 </script>
 </body>
