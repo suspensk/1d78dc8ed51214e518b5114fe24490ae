@@ -1,0 +1,412 @@
+<html>
+<head>
+    <style>
+
+        .m-name {
+         /*   margin-left: 12px;*/
+            font-weight: bold;
+            font-size:16px;
+            color: #221461;
+            display:block;}
+        .m-role {
+            margin-top: 5px;
+           /* margin-left: 5px;*/
+          /*  font-weight: bold;*/
+           /* font-size:16px;*/
+         /*   color: #221461;*/
+            /*The change*/
+            margin-right:20px;
+            display:block;
+        }
+        .m-item {margin-bottom:10px;}
+        .m-point { font-weight: bold;
+            font-size:20px;
+            color: #221461;
+            display:block;
+        margin-bottom:20px;
+
+        }
+    </style>
+    <title>Title of the document</title>
+</head>
+
+<body>
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+<div id="map" style="width: auto; height: 550px; position: relative; overflow: hidden;"></div>
+<script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+        key: "AIzaSyCLwcoUuXPOFr3azpE5Bq-6IyV3fUoY_A8",
+        //   v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+    });
+
+    var map;
+    var geocoder;
+    var address = "Jerusalem city";
+    async function initMap() {
+
+        const { Map } = await google.maps.importLibrary("maps");
+        const myLatLng = { lat: 31.768319, lng: 35.21371 };
+         map = new Map(document.getElementById("map"), {
+            center: myLatLng,
+            zoom: 3,
+        });
+    //    geocoder = new google.maps.Geocoder();
+
+
+         codeAddress(address);
+
+        var latLng = new google.maps.LatLng(-34.397, 150.644);
+        var mIcon = {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillOpacity: 1.0,
+            fillColor: '#2C2CF7',
+            strokeOpacity: 0.8,
+            strokeWeight: 6,
+            strokeColor: '#221461',
+            scale: 16
+          /*  scale: 15,
+            fillColor: fillColor,
+            fillOpacity: 1.0,
+            strokeWeight: 6,
+            strokeOpacity: 0.8,
+            strokeColor: outsideColor,
+            rotation: 30*/
+        };
+
+        var gMarker = new google.maps.Marker({
+            map: map,
+            position: latLng,
+            title: 'Number 123',
+            icon: mIcon,
+            label: {color: '#fff', fontSize: '10px', fontWeight: '600',
+                text: '60'}
+        });
+    }
+
+    initMap();
+
+    function codeAddress(address) {
+
+    //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //    console.log(results);
+       //     var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
+        var latLng={ lat: 31.768319, lng: 35.21371 };
+            console.log (latLng);
+            if (1) {
+
+                var marker =  new google.maps.Marker({
+                    position: latLng,
+                    map,
+                    title: "Jerusalem, Israel",
+                    content: "Jerusalem, Israel"
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: ""
+                });
+
+                marker.addListener('click', function() {
+                    infowindow.setContent('<div><span class="m-point">' + marker.content + '</span>' +
+                        '<div style="overflow-y: scroll; max-height:200px;">' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name"> Josef Blum</span>' +
+                        '<span class="m-role">President & CEO, ' +
+                        'Founding Director</span></div>' +
+                        '<div class="m-item">' +
+                        '<span class="m-name">Robert Makovecki</span>' +
+                        '<span class="m-role">Social Scientist and Policy Analyst, ' +
+                        'Founding Director</span></div>' +
+
+                        '</div>');
+                    infowindow.open(map, marker);
+                });
+
+             /*   var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: '123'
+                });
+                console.log (map);*/
+            } else {
+              //  alert('Geocode was not successful for the following reason: ' + status);
+            }
+      //  });
+    }
+</script>
+</body>
+
+</html>
