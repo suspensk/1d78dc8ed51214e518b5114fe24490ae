@@ -35,8 +35,66 @@
 <p>This is a paragraph.</p>
 <div id="map" style="width: auto; height: 550px; position: relative; overflow: hidden;"></div>
 <script>
+    var contactsList = {
+    "##NO_COORDINATES##": [
+        {
+            "id": 36,
+            "name": "Inga",
+            "job_title": "",
+            "organization": "",
+            "address": "Tucson, AZ, USA",
+            "coordinates": "##NO_COORDINATES##"
+        },
+        {
+            "id": 35,
+            "name": "Marik",
+            "job_title": "",
+            "organization": "",
+            "address": "Eilat, Israel",
+            "coordinates": "##NO_COORDINATES##"
+        }
+    ],
+    "31.768319,35.21371": [
+        {
+            "id": 34,
+            "name": "fff",
+            "job_title": "",
+            "organization": "",
+            "address": "Seattle, WA, USA",
+            "coordinates": "31.768319,35.21371"
+        },
+        {
+            "id": 32,
+            "name": "rrr",
+            "job_title": "",
+            "organization": "",
+            "address": "",
+            "coordinates": "31.768319,35.21371"
+        }
+    ],
+    "21.768319,25.21371": [
+        {
+            "id": 33,
+            "name": "fff",
+            "job_title": "",
+            "organization": "",
+            "address": "",
+            "coordinates": "21.768319,25.21371"
+        }
+    ]
+};
+    console.log('contactsList',contactsList);
+    // for (x in rubricsOptions) {
+    //     if(rubricsOptions[x] == 'НММ rubrics')
+    //         delete rubricsOptions[x];
+    //     break;
+    // }
+
+
+</script>
+<script>
     (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-        key: "AIzaSyCLwcoUuXPOFr3azpE5Bq-6IyV3fUoY_A8",
+        key: "AIzaSyB2UExem0Q4BAUAi9pESzXS3TlF16J9G78",
         //   v: "weekly",
         // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
         // Add other bootstrap parameters as needed, using camel case.
@@ -45,6 +103,7 @@
     var map;
     var geocoder;
     var address = "Jerusalem city";
+    var coordsObj = {};
     async function initMap() {
 
         const { Map } = await google.maps.importLibrary("maps");
@@ -56,7 +115,15 @@
     //    geocoder = new google.maps.Geocoder();
 
 
+        for(var i in contactsList) {
+            viewMarker(contactsList[i]);
+        }
+        console.log('coordsObj',coordsObj);
+
+
          codeAddress(address);
+
+         /* custom marker */
 
         var latLng = new google.maps.LatLng(-34.397, 150.644);
         var mIcon = {
@@ -88,6 +155,50 @@
 
     initMap();
 
+    function viewMarker(contacts){
+        var coordArray = contacts[0]['coordinates'].split(",");
+        if(coordArray.length !== 2){
+            return;
+        }
+
+            var lat = coordArray[0];
+            var lng = coordArray[1];
+            console.log('LAT AND LANGL', lat, lng);
+            var latLng={ lat: lat, lng: lng };
+            var marker =  new google.maps.Marker({
+                position: latLng,
+                map,
+                title: contacts[0]['address'],
+                content: contacts[0]['address']
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: ""
+            });
+
+        var contactsContent = '';
+        for(var i in contacts) {
+            console.log('CURDALTA', contacts[i]['name'],contacts[i]['coordinates']);
+            contactsContent += '<div class="m-item">' +
+                '<span class="m-name"> Josef Blum</span>' +
+                '<span class="m-role">President & CEO, ' +
+                'Founding Director</span></div>' ;
+        }
+
+
+
+      //  console.log (latLng);
+
+
+            marker.addListener('click', function() {
+                infowindow.setContent('<div><span class="m-point">' + marker.content + '</span>' +
+                    '<div style="overflow-y: scroll; max-height:200px;">' +
+                    contactsContent +
+                    '</div>');
+                infowindow.open(map, marker);
+            });
+
+    }
     function codeAddress(address) {
 
     //    geocoder.geocode({ 'address': address }, function (results, status) {
