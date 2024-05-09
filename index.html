@@ -35,7 +35,7 @@
 <p>This is a paragraph.</p>
 <div id="map" style="width: auto; height: 550px; position: relative; overflow: hidden;"></div>
 <script>
-    alert(2)
+    alert(3)
     var contactsList = {
     "##NO_COORDINATES##": [
         {
@@ -191,6 +191,9 @@
 
 
             marker.addListener('click', function() {
+                if (infowindow) {
+        infowindow.close();
+    }
                 infowindow.setContent('<div><span class="m-point">' + marker.content + '</span>' +
                     '<div style="overflow-y: auto; max-height:200px;">' +
                     contactsContent +
