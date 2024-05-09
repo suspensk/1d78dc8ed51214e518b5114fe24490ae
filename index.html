@@ -180,9 +180,8 @@
         for(var i in contacts) {
             console.log('CURDALTA', contacts[i]['name'],contacts[i]['coordinates']);
             contactsContent += '<div class="m-item">' +
-                '<span class="m-name"> Josef Blum</span>' +
-                '<span class="m-role">President & CEO, ' +
-                'Founding Director</span></div>' ;
+                '<span class="m-name"> '+contacts[i]['name']+'</span>' +
+                '<span class="m-role">'+contacts[i]['job_title']+'</span></div>' ;
         }
 
 
@@ -521,6 +520,7 @@
 </body>
 
 </html>
+
 
 
 
